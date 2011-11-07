@@ -63,7 +63,8 @@ Compiler::init()
     clang_->createDiagnostics(0, NULL, diagPrinter);
 
     clang::TargetOptions& targetOpts = clang_->getTargetOpts();
-    targetOpts.Triple = llvm::sys::getHostTriple();
+    //targetOpts.Triple = llvm::sys::getHostTriple();
+    targetOpts.Triple = llvm::sys::getDefaultTargetTriple();
 
     clang_->getInvocation().setLangDefaults(clang::IK_OpenCL);
 }

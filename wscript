@@ -74,6 +74,9 @@ def configure(cnf):
                   uselib_store='LLVM')
     cnf.env['CXXFLAGS_LLVM'].remove('-fno-exceptions')
     cnf.env['CXXFLAGS_LLVM'].remove('-fno-rtti')
+    cnf.env['CXXFLAGS_LLVM'].append('-I/home/deepak/lpgpu/build/tools/clang/include')
+    cnf.env['CXXFLAGS_LLVM'].append('-I/home/deepak/lpgpu/llvm/tools/clang/include')
+    cnf.env['CXXFLAGS_LLVM'].append('-I/home/deepak/lpgpu/gtest-1.6.0/include')
 
 def build(bld):
     src_list = ' memory/'+' memory/'.join(memory_srcs) + \
@@ -111,7 +114,8 @@ def build(bld):
               source=unittest_list,
               target='clorene_test',
               includes='include .',
+              #lib=['gtest', 'PocoFoundation' ,'clang'],
               lib=['gtest', 'PocoFoundation'],
-              libpath=[POCO_ROOT + '/lib'],
+              libpath=[POCO_ROOT + '/lib', '/home/deepak/lpgpu/gtest-1.6.0/'],
               use='OpenCL')
 
